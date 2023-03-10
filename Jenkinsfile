@@ -1,20 +1,14 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Merge') {
+        stage('Test') {
+            when {
+                changeset "github.com/Rmaabari/test-repo"
+            }
             steps {
-                git branch: 'main', url: 'https://github.com/Rmaabari/test-repo.git'
+                sh 'main.py' // execute main.py python script when ever 
             }
         }
-    stage('Deploy') {
-      when {
-        branch 'master'
-      }
-      steps {
-        sh 'echo "Deploying..."'
-        sh 'python main.py'
-      }
     }
-  }
 }
