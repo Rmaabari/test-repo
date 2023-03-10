@@ -7,10 +7,14 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Rmaabari/test-repo.git'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'python main.py'
-            }
-        }
+    stage('Deploy') {
+      when {
+        branch 'master'
+      }
+      steps {
+        sh 'echo "Deploying..."'
+        sh 'python main.py'
+      }
     }
+  }
 }
